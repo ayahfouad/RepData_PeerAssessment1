@@ -42,6 +42,8 @@ steps_per_day
 
 hist(steps_per_day$total, main="Number of steps per day", 
      xlab="Number of steps per day", ylab = "Frequency")
+dev.copy(png, file= "Number of steps per day.png",width = 480, height = 480)
+     dev.off()
 means <- mean(steps_per_day$total ,na.rm = TRUE)
 median <- median(steps_per_day$total , na.rm = TRUE)
 print(means)
@@ -65,7 +67,8 @@ steps_by_interval <- aggregate(steps ~ interval, data, mean)
 plot(steps_by_interval$interval, steps_by_interval$steps, type='l', 
      main="Average number of steps over all days", xlab="Interval", 
      ylab="Average number of steps")
-
+dev.copy(png, file= "Average number of steps over all days.png",width = 480, height = 480)
+     dev.off()
 # Max steps
 max_steps_row <- which.max(steps_by_interval$steps)
 # It's interval
@@ -113,6 +116,8 @@ df_imputed_steps_by_day <- aggregate(steps ~ date, data_imputed, sum)
 head(df_imputed_steps_by_day)
 hist(df_imputed_steps_by_day$steps, main="Total number of steps per day (imputed)", 
      xlab="Total number of steps per day")
+dev.copy(png, file= "Total number of steps per day (imputed).png",width = 480, height = 480)
+     dev.off()
 
 # mean and median of imputed data
 mean(df_imputed_steps_by_day$steps)
@@ -148,7 +153,7 @@ df_imputed_steps_by_interval <- aggregate(steps ~ interval + type_of_day, data_i
 qplot(interval,steps, data = df_imputed_steps_by_interval, geom=c("line"),
       xlab = "Interval", ylab = "Number of steps", col= type_of_day) +
       facet_wrap(. ~ type_of_day, ncol = 1)
-
+      ggsave(filename ="type of days.png")
 
 ```
 
